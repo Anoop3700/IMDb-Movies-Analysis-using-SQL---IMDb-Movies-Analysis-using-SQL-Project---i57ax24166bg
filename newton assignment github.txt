@@ -368,37 +368,48 @@ English"		6865235		2
 
 5. Rank actors based on their average ratings in Indian movies released in India.
 
-with a2 as(
-with a1 as(
-select movie_id as m_id, 
-avg_rating,
-ROW_NUMBER() OVER(ORDER BY avg_rating ) AS best_actor
- from ratings where movie_id in(
-select id from movie_2 where country like "India"
-))
-select name_id, 
-a1.best_actor as bst_actor from role_mapping, 
-a1 where movie_id = a1.m_id order by best_actor)
-select a2.bst_actor, name from names, a2 where id = a2.name_id 
-order by a2.bst_actor desc
+with a1 as(select m.id, 
+r.avg_rating,
+ro.name_id ,
+n.name,
+RANK () OVER (
+ORDER BY r.avg_rating desc
+) AS Rank_no 
+from movie_2 m 
+join ratings r 
+on m.id = r.movie_id
+join role_mapping ro 
+on ro.movie_id = m.id
+join names n 
+on n.id = ro.name_id
+where country like "India" and ro.category like "actor"
+order by avg_rating desc)
+select a1.rank_no, a1.name from a1
 
 output:
 
 bst_actor	name
-965	Madhavan
-951	Ajith Kumar
-944	Tabu
-918	Hrithik Roshan
-899	Mammootty
-873	Nassar
-863	Amitabh Bachchan
-849	Mammootty
-823	Mammootty
-797	Tanikella Bharani
-795	Nassar
-788	Tanikella Bharani
-759	Juhi Chawla
-694	Nassar
+1	Madhavan
+2	Ajith Kumar
+3	Hrithik Roshan
+4	Mammootty
+5	Nassar
+6	Amitabh Bachchan
+7	Mammootty
+8	Mammootty
+9	Tanikella Bharani
+9	Nassar
+9	Tanikella Bharani
+12	Nassar
+13	Nagarjuna Akkineni
+14	Mammootty
+15	Mammootty
+16	Nassar
+17	Ashutosh Rana
+18	Anupam Kher
+19	Mammootty
+20	Rahul Bose
+21	Ajith Kumar
 
 
 6. Identify the top five actresses in Hindi movies released in India based on their average ratings.
