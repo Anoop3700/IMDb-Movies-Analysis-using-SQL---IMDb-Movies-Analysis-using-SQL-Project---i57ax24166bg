@@ -268,16 +268,14 @@ INNER JOIN ratings AS r
 ON g.id = r.movie_id
 INNER JOIN movie_2 AS m
 ON m.id = g.id
-WHERE r.avg_rating > 8 and title LIKE 'The%'
+WHERE r.avg_rating > 8 and title LIKE 'The %'
 order by genre
 
 
 output:
 
 genre	avg_rating	title
-Action	8.3	Theeran Adhigaaram Ondru
 Crime	8.7	The Irishman
-Crime	8.3	Theeran Adhigaaram Ondru
 Crime	8.4	The Gambinos
 Drama	8.8	The Blue Elephant 2
 Drama	9.5	The Brighton Miracle
@@ -289,7 +287,6 @@ Drama	8.2	The King and I
 Horror	8.8	The Blue Elephant 2
 Mystery	8.8	The Blue Elephant 2
 Romance	8.2	The King and I
-Thriller	8.3	Theeran Adhigaaram Ondru
 
 
 Segment V: Crew Analysis
