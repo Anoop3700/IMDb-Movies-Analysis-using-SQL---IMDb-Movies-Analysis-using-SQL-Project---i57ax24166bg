@@ -4,6 +4,16 @@ SELECT table_name, table_rows
 FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_SCHEMA = 'movie_analysis'
 
+output:
+
+director_mapping	3867
+genre	14939
+movie	3771
+movie_2	7784
+names	1371
+ratings	7863
+role_mapping	15323
+
 2. Identify which columns in the movie table have null values.
 
 --
